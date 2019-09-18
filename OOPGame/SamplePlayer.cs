@@ -3,7 +3,6 @@ using System;
 
 namespace Tetris_OOPGame
 {
-
     public class SamplePlayer : IGameObject
     {
         private IGameObject gameObject;
@@ -21,9 +20,8 @@ namespace Tetris_OOPGame
         private int _speed;
         Random rnd = new Random();
         private ConsoleGraphics _graphics;
-
         public bool IsRun { get; }
-       
+        
         public SamplePlayer(ConsoleGraphics graphics)
         {
             fieldGrid = new int[numberCellWidth, numberCellHeigh];
@@ -113,4 +111,3 @@ namespace Tetris_OOPGame
         }
     }
 }
-
