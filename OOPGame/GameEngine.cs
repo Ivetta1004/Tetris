@@ -52,19 +52,16 @@ namespace Tetris_OOPGame
                     }
                     // double buffering technique is used
                     _graphics.FlipPages();
-
                     Thread.Sleep(60);
                 }
             } while (SamplePlayer.gameIsOver);
         }
-
-        private bool GameIsOver()
+        private void GameIsOver()
         {
             _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
             _graphics.DrawString("Game is over", "Arial", 0xFF000000, 150, 150);
             _graphics.DrawString($"Your score: {SamplePlayer._score.ToString()}", "Arial", 0xFF00FF00, 150, 170);
             _graphics.DrawString("If you want to restart, press Space", "Arial", 0xFF000000, 150, 190);
-            return false;
         }
     }
 }
