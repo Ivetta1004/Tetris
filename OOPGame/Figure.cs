@@ -18,8 +18,8 @@ namespace Tetris_OOPGame
         private Cell[] cell;
         private int[,] _grid;
         Random rnd = new Random();
-        int chooseFigure;
-        bool isTurn = true;
+        private int chooseFigure;
+        private bool isTurn = true;
         private const int size = 4;
         private int _step;
 
@@ -37,7 +37,6 @@ namespace Tetris_OOPGame
             DoFigure();
             _grid = grid;
         }
-
         public bool IsRun
         {
             get { return isRun; }
