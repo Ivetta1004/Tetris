@@ -3,7 +3,6 @@ using System;
 
 namespace Tetris_OOPGame
 {
-
     public class Program
     {
         static void Main(string[] args)
@@ -20,7 +19,6 @@ namespace Tetris_OOPGame
                 StartGame();
             }
         }
-
         public static void StartGame()
         {
             ConsoleGraphics graphics = new ConsoleGraphics();
