@@ -5,24 +5,27 @@ using System.Threading;
 
 namespace Tetris_OOPGame
 {
-    public class GameEngine
+    public abstract class GameEngine
     {
-        private ConsoleGraphics _graphics;
-        private List<IGameObject> objects = new List<IGameObject>();
-        private List<IGameObject> tempObjects = new List<IGameObject>();
-        public static bool restart = false;
+        private readonly ConsoleGraphics _graphics;
+        private readonly List<IGameObject> objects = new List<IGameObject>();
+        private readonly List<IGameObject> tempObjects = new List<IGameObject>();
+        internal static bool restart = false;
+       
         public GameEngine(ConsoleGraphics graphics)
         {
             _graphics = graphics;
         }
+
         public void AddObject(IGameObject obj)
         {
             tempObjects.Add(obj);
         }
+
         public void Start()
         {
             restart = false;
-            SamplePlayer._score = 0;
+            Player._score = 0;
             do
             {
                 while (true)
@@ -37,12 +40,12 @@ namespace Tetris_OOPGame
                     // clearing screen before painting new frame
                     _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
                     _graphics.DrawString("Score: ", "Arial", 0xFF000000, 250, 250);
-                    _graphics.DrawString(SamplePlayer._score.ToString(), "Arial", 0xFF00FF00, 320, 250);
+                    _graphics.DrawString(Player._score.ToString(), "Arial", 0xFF00FF00, 320, 250);
                     foreach (var obj in objects)
                         obj.Render(_graphics);
-                    if (SamplePlayer.gameIsOver)
+                    if (Player.gameIsOver)
                     {
-                        SamplePlayer.gameIsOver = false;
+                        Player.gameIsOver = false;
                         GameIsOver();
                         if (Input.IsKeyDown(Keys.SPACE))
                         {
@@ -52,15 +55,16 @@ namespace Tetris_OOPGame
                     }
                     // double buffering technique is used
                     _graphics.FlipPages();
-                    Thread.Sleep(60);
+                    Thread.Sleep(100);
                 }
-            } while (SamplePlayer.gameIsOver);
+            } while (Player.gameIsOver);
         }
+
         private void GameIsOver()
         {
             _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
             _graphics.DrawString("Game is over", "Arial", 0xFF000000, 150, 150);
-            _graphics.DrawString($"Your score: {SamplePlayer._score.ToString()}", "Arial", 0xFF00FF00, 150, 170);
+            _graphics.DrawString($"Your score: {Player._score.ToString()}", "Arial", 0xFF00FF00, 150, 170);
             _graphics.DrawString("If you want to restart, press Space", "Arial", 0xFF000000, 150, 190);
         }
     }

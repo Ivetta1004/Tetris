@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="ConsoleGraphics.cs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\ITCloud\C#_.Net\Lib\ConsoleGraphics.cs.dll</HintPath>
+      <HintPath>..\..\lib\ConsoleGraphics.cs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,11 +50,19 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="IGameObject.cs" />
+    <Compile Include="LeftLFigure.cs" />
+    <Compile Include="LineFigure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleGameEngine.cs" />
-    <Compile Include="SamplePlayer.cs" />
+    <Compile Include="RightLFigure.cs" />
+    <Compile Include="SquareFigure.cs" />
+    <Compile Include="TetrisGameEngine.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="TFigure.cs" />
+    <Compile Include="ThunderFigure.cs" />
+    <Compile Include="ZFigure.cs" />
+    <Compile Include="Сoordinate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
