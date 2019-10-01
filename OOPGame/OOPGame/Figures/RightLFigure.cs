@@ -11,8 +11,7 @@ namespace Tetris_OOPGame
     {
         private const uint rightLColor = 0xFF8080FF;
 
-        public RightLFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public RightLFigure(int[,] grid) : base(grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
@@ -29,6 +28,7 @@ namespace Tetris_OOPGame
             cell[3] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y + 2 * field.height };
             return cell;
         }
+
         protected override Cell[] TurnFigure(Cell[] cell)
         {
             int i = 0;
@@ -39,12 +39,13 @@ namespace Tetris_OOPGame
                     if (cell[y].Y == 360 || cell[y].Y == 380 || cell[y].Y == 400 || cell[y].Y == 420)
                         break;
                 }
+
                 switch (option)
                 {
-                    case 0:
+                    case Option.option0:
                         if (cell[i].X == 180)
                         {
-                            option = 1;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X - field.width, Y = cell[0].Y };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
@@ -53,7 +54,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 180)
                         {
-                            option = 1;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
@@ -61,10 +62,10 @@ namespace Tetris_OOPGame
                             break;
                         }
                         break;
-                    case 1:
+                    case Option.option1:
                         if (cell[i].X == 160)
                         {
-                            option = 2;
+                            option = Option.option2;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y + field.height };
@@ -73,7 +74,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 160)
                         {
-                            option = 2;
+                            option = Option.option2;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y + field.height };
@@ -81,10 +82,10 @@ namespace Tetris_OOPGame
                             break;
                         }
                         break;
-                    case 2:
+                    case Option.option2:
                         if (cell[i].X == 180)
                         {
-                            option = 3;
+                            option = Option.option3;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X - field.width, Y = cell[0].Y + field.height };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + 2 * field.width, Y = cell[0].Y };
@@ -93,7 +94,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 180)
                         {
-                            option = 3;
+                            option = Option.option3;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X + 2 * field.width, Y = cell[0].Y };
@@ -101,10 +102,10 @@ namespace Tetris_OOPGame
                             break;
                         }
                         break;
-                    case 3:
+                    case Option.option3:
                         if (cell[i].X == 160)
                         {
-                            option = 0;
+                            option = Option.option0;
                             cell[0] = new Cell { Color = rightLColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[1] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[2] = new Cell { Color = rightLColor, X = cell[0].X, Y = cell[0].Y + 2 * field.height };
@@ -113,7 +114,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 160)
                         {
-                            option = 0;
+                            option = Option.option0;
                             DoFigure();
                             break;
                         }

@@ -10,8 +10,7 @@ namespace Tetris_OOPGame
     {
         private const uint thunderColor = 0xFFa8329d;
 
-        public ThunderFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public ThunderFigure(int[,] grid) : base(grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
@@ -28,15 +27,16 @@ namespace Tetris_OOPGame
             cell[3] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y + 2 * field.height };
             return cell;
         }
+
         protected override Cell[] TurnFigure(Cell[] cell)
         {
             int i = 0;
             switch (option)
             {
-                case 0:
+                case Option.option0:
                     if (cell[i].X == 180)
                     {
-                        option = 1;
+                        option = Option.option1;
                         cell[0] = new Cell { Color = thunderColor, X = cell[0].X- field.width, Y = cell[0].Y };
                         cell[1] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y };
                         cell[2] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y - field.height };
@@ -45,7 +45,7 @@ namespace Tetris_OOPGame
                     }
                     if (cell[i].X < 180)
                     {
-                        option = 1;
+                        option = Option.option1;
                         cell[0] = new Cell { Color = thunderColor, X = cell[0].X, Y = cell[0].Y };
                         cell[1] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y };
                         cell[2] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y - field.height };
@@ -53,10 +53,10 @@ namespace Tetris_OOPGame
                         break;
                     }
                     break;
-                case 1:
+                case Option.option1:
                     if (cell[i].X == 160)
                     {
-                        option = 0;
+                        option = Option.option0;
                         cell[0] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y };
                         cell[1] = new Cell { Color = thunderColor, X = cell[0].X, Y = cell[0].Y + field.height };
                         cell[2] = new Cell { Color = thunderColor, X = cell[0].X + field.width, Y = cell[0].Y + field.height };
@@ -65,7 +65,7 @@ namespace Tetris_OOPGame
                     }
                     if (cell[i].X < 180)
                     {
-                        option = 0;
+                        option = Option.option0;
                         DoFigure();
                         break;
                     }

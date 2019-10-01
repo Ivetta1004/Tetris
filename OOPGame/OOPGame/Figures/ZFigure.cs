@@ -11,8 +11,7 @@ namespace Tetris_OOPGame
     {
         private const uint zColor = 0xFFFFFF00;
 
-        public ZFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public ZFigure(int[,] grid) : base(grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
@@ -37,20 +36,19 @@ namespace Tetris_OOPGame
             {
                 switch (option)
                 {
-                    case 0:
+                    case Option.option0:
                         if (cell[i].X == 160)
                         {
-                            option = 1;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[1] = new Cell { Color = zColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[2] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[3] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y - field.height };
                             break;
-
                         }
                         if (cell[i].X < 160)
                         {
-                            option = 1;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = zColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = zColor, X = cell[0].X, Y = cell[0].Y + field.height };
                             cell[2] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y };
@@ -58,9 +56,10 @@ namespace Tetris_OOPGame
                             break;
                         }
                         break;
-                    case 1:
+                    case Option.option1:
                         if (cell[i].X == 180)
                         {
+                            option = Option.option0;
                             cell[0] = new Cell { Color = zColor, X = cell[0].X - field.width, Y = cell[0].Y };
                             cell[1] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = zColor, X = cell[0].X + field.width, Y = cell[0].Y + field.height };
@@ -69,7 +68,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 180)
                         {
-                            option = 0;
+                            option = Option.option0;
                             DoFigure();
                             break;
                         }

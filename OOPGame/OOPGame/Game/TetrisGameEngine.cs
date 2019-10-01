@@ -9,9 +9,12 @@ namespace Tetris_OOPGame
 {
     public class TetrisGameEngine : GameEngine
     {
+        public TetrisGameEngine() { }
+
         public TetrisGameEngine(ConsoleGraphics graphics) : base(graphics)
         {
-            AddObject(new Player(graphics));
+            player = new Player(graphics);
+            AddObject(player);
         }
     }
 }

@@ -3,7 +3,6 @@ using System;
 
 namespace Tetris_OOPGame
 {
-
     public class Program
     {
         static void Main(string[] args)
@@ -14,8 +13,11 @@ namespace Tetris_OOPGame
             Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
             Console.Clear();
-            GameEngine.restart = true;
-            while (GameEngine.restart)
+            GameEngine tetris = new TetrisGameEngine
+            {
+                restart = true
+            };
+            while (tetris.restart)
             {
                 StartGame();
             }

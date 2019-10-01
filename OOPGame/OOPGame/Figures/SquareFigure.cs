@@ -10,8 +10,7 @@ namespace Tetris_OOPGame
     {
         private const uint squareColor = 0xFFFF0000;
 
-        public SquareFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public SquareFigure(int[,] grid) : base(grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
@@ -28,6 +27,7 @@ namespace Tetris_OOPGame
             cell[3] = new Cell { Color = squareColor, X = cell[0].X + field.width, Y = cell[0].Y + field.height };
             return cell;
         }
+
         protected override Cell[] TurnFigure(Cell[] cell)
         {
             DoFigure();

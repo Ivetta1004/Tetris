@@ -11,8 +11,7 @@ namespace Tetris_OOPGame
     {
         private const uint lineColor = 0xFF3380FF;
 
-        public LineFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public LineFigure(int[,] grid) : base(grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
@@ -29,6 +28,7 @@ namespace Tetris_OOPGame
             cell[3] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y + 3 * field.height };
             return cell;
         }
+
         protected override Cell[] TurnFigure(Cell[] cell)
         {
             int i = 0;
@@ -36,10 +36,10 @@ namespace Tetris_OOPGame
             {
                 switch (option)
                 {
-                    case 0:
+                    case Option.option0:
                         if (cell[i].X == 160 || cell[i].X == 180 || cell[i].X == 200)
                         {
-                            option++;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = lineColor, X = cell[0].X - field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = lineColor, X = cell[0].X - 2 * field.width, Y = cell[0].Y };
@@ -48,7 +48,7 @@ namespace Tetris_OOPGame
                         }
                         if (cell[i].X < 160)
                         {
-                            option++;
+                            option = Option.option1;
                             cell[0] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = lineColor, X = cell[0].X + field.width, Y = cell[0].Y };
                             cell[2] = new Cell { Color = lineColor, X = cell[0].X + 2 * field.width, Y = cell[0].Y };
@@ -56,9 +56,10 @@ namespace Tetris_OOPGame
                             break;
                         }
                         break;
-                    case 1:
+                    case Option.option1:
                         if (cell[i].Y == 360 || cell[i].Y == 380 || cell[i].Y == 400)
                         {
+                            option = Option.option0;
                             cell[0] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y };
                             cell[1] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y - field.height };
                             cell[2] = new Cell { Color = lineColor, X = cell[0].X, Y = cell[0].Y - 2 * field.height };
@@ -67,7 +68,7 @@ namespace Tetris_OOPGame
                         }
                         else
                         {
-                            option--;
+                            option = Option.option0;
                             DoFigure();
                         }
                         break;

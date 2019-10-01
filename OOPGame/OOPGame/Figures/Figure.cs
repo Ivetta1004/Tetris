@@ -10,21 +10,20 @@ namespace Tetris_OOPGame
     internal abstract class Figure : IGameObject
     {
         protected FieldSize field = new FieldSize();
-        private readonly int _speed;
+        private readonly int _speed = 3;
         private int[,] _grid;
         private const int size = 4;
         protected Cell[] cell = new Cell[size];
         private int _step;
-        protected int option;
+        protected Option option;
         public bool IsRun { get; private set; }
 
-        public Figure(int speed, int[,] grid)
+        public Figure(int[,] grid)
         {
-            _speed = speed;
             _step = 1;
             IsRun = true;
             _grid = grid;
-            option = 0;
+            option = Option.option0;
         }
 
         protected abstract Cell[] DoFigure();

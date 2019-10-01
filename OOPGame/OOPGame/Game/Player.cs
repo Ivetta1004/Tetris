@@ -10,12 +10,11 @@ namespace Tetris_OOPGame
         private const uint fieldColor = 0xFF000000;
         private const uint figureColor = 0xFF0FFF00;
         private readonly int[,] fieldGrid;
-        private readonly int _speed;
+        private Random rnd = new Random();
+        internal bool gameIsOver = false;
         private int _score;
         internal int Score { get { return _score; } }  
-        private Random rnd = new Random();
         public bool IsRun { get; private set; }
-        internal static bool gameIsOver = false;
 
         public Player() { }
 
@@ -29,18 +28,6 @@ namespace Tetris_OOPGame
                     fieldGrid[i, j] = 0;
                 }
             }
-            _speed = 3;
-
-        }
-
-        //internal int IncrementScore()
-        //{
-        //    return ++_score;
-        //}
-
-        internal int GetScore()
-        {
-            return Score;
         }
 
         public void Render(ConsoleGraphics graphics)
@@ -94,10 +81,7 @@ namespace Tetris_OOPGame
                         if (fieldGrid[j, i] == 1 && j == field.numberCellWidth - 1)
                         {
                             ++_score;
-                            // GetScore();
-                            //IncrementScore();
                             DeleteLine(i);
-
                         }
                     }
                 }
@@ -131,25 +115,25 @@ namespace Tetris_OOPGame
             switch (chooseFigure)
             {
                 case 0:
-                    obj = new LineFigure(_speed, fieldGrid);
+                    obj = new LineFigure(fieldGrid);
                     break;
                 case 1:
-                    obj = new RightLFigure(_speed, fieldGrid);
+                    obj = new RightLFigure(fieldGrid);
                     break;
                 case 2:
-                    obj = new LeftLFigure(_speed, fieldGrid);
+                    obj = new LeftLFigure(fieldGrid);
                     break;
                 case 3:
-                    obj = new SquareFigure(_speed, fieldGrid);
+                    obj = new SquareFigure(fieldGrid);
                     break;
                 case 4:
-                    obj = new TFigure(_speed, fieldGrid);
+                    obj = new TFigure(fieldGrid);
                     break;
                 case 5:
-                    obj = new ThunderFigure(_speed, fieldGrid);
+                    obj = new ThunderFigure(fieldGrid);
                     break;
                 case 6:
-                    obj = new ZFigure(_speed, fieldGrid);
+                    obj = new ZFigure(fieldGrid);
                     break;
             }
             return obj;
