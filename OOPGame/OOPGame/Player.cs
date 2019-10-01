@@ -3,7 +3,6 @@ using System;
 
 namespace Tetris_OOPGame
 {
-    public delegate int Score();
     public class Player : IGameObject
     {
         private IGameObject figure;
@@ -11,21 +10,14 @@ namespace Tetris_OOPGame
         private const uint fieldColor = 0xFF000000;
         private const uint figureColor = 0xFF0FFF00;
         private readonly int[,] fieldGrid;
-        internal static int _score;
-       // internal int Score { get { return _score; } private set { _score = value; } }     // fix without static
-        private Random rnd = new Random();
         private readonly int _speed;
+        private int _score;
+        internal int Score { get { return _score; } }  
+        private Random rnd = new Random();
         public bool IsRun { get; private set; }
-        // Score delegateScore;
-        //  public event Score MyEvent;
         internal static bool gameIsOver = false;
 
-        public Player(int score)
-        {
-
-            _score = score;
-            //MyEvent = GetScore;
-        }
+        public Player() { }
 
         public Player(ConsoleGraphics graphics)
         {
@@ -43,15 +35,13 @@ namespace Tetris_OOPGame
 
         //internal int IncrementScore()
         //{
-
         //    return ++_score;
-
         //}
 
-        //internal int GetScore()
-        //{
-        //    return _score;
-        //}
+        internal int GetScore()
+        {
+            return Score;
+        }
 
         public void Render(ConsoleGraphics graphics)
         {

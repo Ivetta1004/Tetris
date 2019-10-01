@@ -11,13 +11,14 @@ namespace Tetris_OOPGame
         private readonly ConsoleGraphics _graphics;
         private readonly List<IGameObject> objects = new List<IGameObject>();
         private readonly List<IGameObject> tempObjects = new List<IGameObject>();
-        internal static bool restart = false;               // fix this
+        internal static bool restart = false;               // not fixed
+        private Player player = new Player();
 
         public GameEngine(ConsoleGraphics graphics)
         {
             _graphics = graphics;
         }
-        
+         
 
         public void AddObject(IGameObject obj)
         {
@@ -26,8 +27,6 @@ namespace Tetris_OOPGame
         public void Start()
         {
             restart = false;
-            // player.GetScore();
-           // Player player = new Player(score);
 
             do
             {
@@ -43,9 +42,10 @@ namespace Tetris_OOPGame
                     // clearing screen before painting new frame
                     _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
                     _graphics.DrawString("Score: ", "Arial", 0xFF000000, 250, 250);
-                       
-                    
-                    _graphics.DrawString(Player._score.ToString(), "Arial", 0xFF00FF00, 320, 250);
+
+                    _graphics.DrawString(player.Score.ToString(), "Arial", 0xFF00FF00, 320, 250);
+
+                    // _graphics.DrawString(player.GetScore().ToString(), "Arial", 0xFF00FF00, 320, 250);
                     foreach (var obj in objects)
                         obj.Render(_graphics);
                     if (Player.gameIsOver)

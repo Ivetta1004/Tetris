@@ -11,8 +11,7 @@ namespace Tetris_OOPGame
     {
         private const uint leftLColor = 0xFF8000FF;
 
-        public LeftLFigure(int speed, int[,] grid)
-            : base(speed, grid)
+        public LeftLFigure(int speed, int[,] grid) : base(speed, grid)
         {
             for (int i = 0; i < cell.Length; i++)
             {
