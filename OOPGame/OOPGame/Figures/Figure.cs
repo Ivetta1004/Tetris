@@ -13,7 +13,6 @@ namespace Tetris_OOPGame
         private const int size = 4;
         private int[,] _grid;
         private int _step;
-        protected Option option;
         protected Cell[] cell = new Cell[size];
         public bool IsRun { get; private set; }
         public IFigureState GetState { get; set; }
@@ -25,19 +24,10 @@ namespace Tetris_OOPGame
             _step = 1;
             IsRun = true;
             _grid = grid;
-            this.GetState = state;
-        }
-
-        public Figure(int[,] grid)
-        {
-            _step = 1;
-            IsRun = true;
-            _grid = grid;
+            GetState = state;
         }
 
         protected abstract Cell[] DoFigure();
-
-        protected virtual Cell[] TurnFigure(Cell[] cell) { return null; }
 
         public void Render(ConsoleGraphics graphics)
         {
@@ -83,7 +73,7 @@ namespace Tetris_OOPGame
             {
                 if (CanMove(Keys.SPACE))
                 {
-                   GetState.TurnFigure(this, cell);
+                    GetState.TurnFigure(this, cell);
                 }
             }
             if (_step % _speed == 0)

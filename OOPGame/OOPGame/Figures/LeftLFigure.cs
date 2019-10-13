@@ -38,7 +38,6 @@ namespace Tetris_OOPGame
                     yield return _cell[3] = new Cell { Color = leftLColor, X = _cell[0].X + 2 * FieldSize.width, Y = _cell[0].Y + FieldSize.height };
                 }
             }
-
         }
 
         public IFigureState TurnFigure(Figure figure, Cell[] cell)
@@ -55,7 +54,7 @@ namespace Tetris_OOPGame
         private const uint leftLColor = 0xFF8000FF;
         private Cell[] _cell;
 
-        public LeftLFigureState2(Cell[] cell) { _cell = cell; } 
+        public LeftLFigureState2(Cell[] cell) { _cell = cell; }
 
         public IEnumerable<Cell> State
         {
@@ -111,7 +110,6 @@ namespace Tetris_OOPGame
                     yield return _cell[1] = new Cell { Color = leftLColor, X = _cell[0].X + FieldSize.width, Y = _cell[0].Y };
                     yield return _cell[2] = new Cell { Color = leftLColor, X = _cell[0].X + 2 * FieldSize.width, Y = _cell[0].Y };
                     yield return _cell[3] = new Cell { Color = leftLColor, X = _cell[0].X + 2 * FieldSize.width, Y = _cell[0].Y + FieldSize.height };
-
                 }
             }
         }
@@ -160,11 +158,9 @@ namespace Tetris_OOPGame
         }
     }
 
-    public class LeftLFigure : Figure, IFigureState
+    internal class LeftLFigure : Figure, IFigureState
     {
-        private const uint leftLColor = 0xFF8000FF;  
-
-        IEnumerable<Cell> IFigureState.State { get; } 
+        private const uint leftLColor = 0xFF8000FF;
 
         public LeftLFigure() { }
 
@@ -176,6 +172,8 @@ namespace Tetris_OOPGame
             }
             DoFigure();
         }
+
+        public IEnumerable<Cell> State { get; }
 
         protected override Cell[] DoFigure()
         {

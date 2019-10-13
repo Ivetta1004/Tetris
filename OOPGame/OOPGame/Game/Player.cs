@@ -107,14 +107,14 @@ namespace Tetris_OOPGame
         private IMovable ChooseFigure()
         {
             IMovable obj = null;
-            int chooseFigure = rnd.Next(3, 4);
+            int chooseFigure = rnd.Next(0, 7);
             switch (chooseFigure)
             {
                 case 0:
-                    obj = new LineFigure(fieldGrid);
+                    obj = new LineFigure(fieldGrid, new LineFigure());
                     break;
                 case 1:
-                    obj = new RightLFigure(fieldGrid);
+                    obj = new RightLFigure(fieldGrid, new RightLFigure());
                     break;
                 case 2:
                     obj = new LeftLFigure(fieldGrid, new LeftLFigure());
@@ -123,22 +123,16 @@ namespace Tetris_OOPGame
                     obj = new SquareFigure(fieldGrid, new SquareFigure());
                     break;
                 case 4:
-                    obj = new TFigure(fieldGrid);
+                    obj = new TFigure(fieldGrid, new TFigure());
                     break;
                 case 5:
-                    obj = new ThunderFigure(fieldGrid);
+                    obj = new ThunderFigure(fieldGrid, new ThunderFigure());
                     break;
                 case 6:
-                    obj = new ZFigure(fieldGrid);
+                    obj = new ZFigure(fieldGrid, new ZFigure());
                     break;
             }
             return obj;
-
-            //Water water = new Water(new LiquidWaterState());
-            //water.Heat();
-            //water.Frost();
-            //water.Frost();
-
         }
     }
 }

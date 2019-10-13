@@ -55,7 +55,6 @@
     <Compile Include="Figures\LeftLFigure.cs" />
     <Compile Include="Figures\LineFigure.cs" />
     <Compile Include="Game\IMovable.cs" />
-    <Compile Include="Option.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game\GameEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
