@@ -38,7 +38,6 @@ namespace Tetris_OOPGame
                     _cell[3] = new Cell { Color = rightLColor, X = _cell[0].X + 2 * FieldSize.width, Y = _cell[0].Y };
                 }
             }
-
         }
 
         public IFigureState TurnFigure(Figure figure, Cell[] cell)
@@ -55,7 +54,10 @@ namespace Tetris_OOPGame
         private const uint rightLColor = 0xFF8080FF;
         private Cell[] _cell;
 
-        public RightLFigureState2(Cell[] cell) { _cell = cell; }
+        public RightLFigureState2(Cell[] cell)
+        {
+            _cell = cell;
+        }
 
         public IEnumerable<Cell> State
         {

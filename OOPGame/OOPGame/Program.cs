@@ -15,20 +15,20 @@ namespace Tetris_OOPGame
             Console.CursorVisible = false;
             Console.Clear();
             ConsoleGraphics graphics = new ConsoleGraphics();
-            GameScore score = new GameScore();
+            GameScore game = new GameScore();
             bool restart = false;
 
             while (true)
             {
-                if (score.GameIsOn)
-                    StartGame(graphics, score);
+                if (game.GameIsOn)
+                    StartGame(graphics, game);
                 if (!restart)
                 {
-                    Restart(graphics, score);
+                    Restart(graphics, game);
                     if (Input.IsKeyDown(Keys.SPACE))
                     {
                         restart = true;
-                        score.GameIsOn = true;
+                        game.GameIsOn = true;
                     }
                 }
                 graphics.FlipPages();
@@ -36,7 +36,7 @@ namespace Tetris_OOPGame
             }
         }
 
-        public static void StartGame(ConsoleGraphics graphics, GameScore score)
+        private static void StartGame(ConsoleGraphics graphics, GameScore score)
         {
             GameEngine engine = new TetrisGameEngine(graphics, score);
             score.Score = 0;
