@@ -10,16 +10,14 @@ namespace Tetris_OOPGame
         private readonly ConsoleGraphics _graphics;
         private readonly List<IGameObject> objects = new List<IGameObject>();
         private readonly List<IGameObject> tempObjects = new List<IGameObject>();
-        protected Player player = new Player();
-        internal bool restart;
+        private GameScore _game;
 
-        public GameEngine() { }
-
-        public GameEngine(ConsoleGraphics graphics)
+        public GameEngine(ConsoleGraphics graphics, GameScore score)
         {
             _graphics = graphics;
+            _game = score;
         }
-        
+
         public void AddObject(IGameObject obj)
         {
             tempObjects.Add(obj);
@@ -27,48 +25,25 @@ namespace Tetris_OOPGame
 
         public void Start()
         {
-           restart = false;
-            do
+            while (_game.GameIsOn)
             {
-                while (true)
-                {
-                    // Game Loop
-                    foreach (var obj in objects)
-                        obj.Update(this);
+                // Game Loop
+                foreach (var obj in objects)
+                    obj.Update(this);
 
-                    objects.AddRange(tempObjects);
-                    tempObjects.Clear();
+                objects.AddRange(tempObjects);
+                tempObjects.Clear();
 
-                    // clearing screen before painting new frame
-                    _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
-                    _graphics.DrawString("Score: ", "Arial", 0xFF000000, 250, 250);
-                    _graphics.DrawString(player.Score.ToString(), "Arial", 0xFF00FF00, 320, 250);
+                // clearing screen before painting new frame
+                _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
 
-                    foreach (var obj in objects)
-                        obj.Render(_graphics);
-                    if (player.gameIsOver)
-                    {
-                        player.gameIsOver = false;
-                        GameIsOver();
-                        if (Input.IsKeyDown(Keys.SPACE))
-                        {
-                            restart = true;
-                            break;
-                        }
-                    }
-                    // double buffering technique is used
-                    _graphics.FlipPages();
-                    Thread.Sleep(100);
-                }
-            } while (player.gameIsOver);
-        }
+                foreach (var obj in objects)
+                    obj.Render(_graphics);
 
-        private void GameIsOver()
-        {
-            _graphics.FillRectangle(0xFFFFFFFF, 0, 0, _graphics.ClientWidth, _graphics.ClientHeight);
-            _graphics.DrawString("Game is over", "Arial", 0xFF000000, 150, 150);
-            _graphics.DrawString($"Your score: {player.Score.ToString()}", "Arial", 0xFF00FF00, 150, 170);
-            _graphics.DrawString("If you want to restart, press Space", "Arial", 0xFF000000, 150, 190);
+                // double buffering technique is used
+                _graphics.FlipPages();
+                Thread.Sleep(100);
+            }
         }
     }
 }

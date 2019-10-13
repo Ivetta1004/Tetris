@@ -49,9 +49,12 @@
   <ItemGroup>
     <Compile Include="Cell.cs" />
     <Compile Include="Figures\Figure.cs" />
+    <Compile Include="Figures\IFigureState.cs" />
+    <Compile Include="Game\GameScore.cs" />
     <Compile Include="Game\IGameObject.cs" />
     <Compile Include="Figures\LeftLFigure.cs" />
     <Compile Include="Figures\LineFigure.cs" />
+    <Compile Include="Game\IMovable.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game\GameEngine.cs" />

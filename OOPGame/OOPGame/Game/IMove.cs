@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris_OOPGame
 {
-    public enum Option
+    public interface IMove
     {
-        option0 = 0,
-        option1 = 1,
-        option2 = 2,
-        option3 = 3
+        bool IsRun { get; }
     }
 }

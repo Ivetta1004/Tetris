@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Tetris_OOPGame
 {
-    internal class FieldSize
+    internal static class FieldSize
     {
-        internal readonly int width = 20;
-        internal readonly int height = 20;
-        internal readonly int xMin = 20;
-        internal readonly int yMin = 20;
-        internal readonly int xMax = 220;
-        internal readonly int yMax = 420;
-        internal readonly int numberCellHeigh = 20;
-        internal readonly int numberCellWidth = 10;
+        internal const int width = 20;
+        internal const int height = 20;
+        internal const int xMin = 20;
+        internal const int yMin = 20;
+        internal const int xMax = 220;
+        internal const int yMax = 420;
+        internal const int numberCellHeigh = 20;
+        internal const int numberCellWidth = 10;
     }
 }

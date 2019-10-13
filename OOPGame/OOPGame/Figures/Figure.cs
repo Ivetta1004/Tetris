@@ -7,34 +7,43 @@ using NConsoleGraphics;
 
 namespace Tetris_OOPGame
 {
-    internal abstract class Figure : IGameObject
+    public abstract class Figure : IMovable
     {
-        protected FieldSize field = new FieldSize();
-        private readonly int _speed = 3;
-        private int[,] _grid;
+        private const int _speed = 3;
         private const int size = 4;
-        protected Cell[] cell = new Cell[size];
+        private int[,] _grid;
         private int _step;
         protected Option option;
+        protected Cell[] cell = new Cell[size];
         public bool IsRun { get; private set; }
+        public IFigureState GetState { get; set; }
+
+        public Figure() { }
+
+        public Figure(int[,] grid, IFigureState state)
+        {
+            _step = 1;
+            IsRun = true;
+            _grid = grid;
+            this.GetState = state;
+        }
 
         public Figure(int[,] grid)
         {
             _step = 1;
             IsRun = true;
             _grid = grid;
-            option = Option.option0;
         }
 
         protected abstract Cell[] DoFigure();
 
-        protected abstract Cell[] TurnFigure(Cell[] cell);
+        protected virtual Cell[] TurnFigure(Cell[] cell) { return null; }
 
         public void Render(ConsoleGraphics graphics)
         {
             for (int i = 0; i < cell.Length; i++)
             {
-                graphics.FillRectangle(cell[i].Color, cell[i].X, cell[i].Y, field.width, field.height);
+                graphics.FillRectangle(cell[i].Color, cell[i].X, cell[i].Y, FieldSize.width, FieldSize.height);
             }
         }
 
@@ -46,7 +55,7 @@ namespace Tetris_OOPGame
                 {
                     for (int i = 0; i < cell.Length; i++)
                     {
-                        cell[i].X -= field.width;
+                        cell[i].X -= FieldSize.width;
                     }
                 }
             }
@@ -56,7 +65,7 @@ namespace Tetris_OOPGame
                 {
                     for (int i = 0; i < cell.Length; i++)
                     {
-                        cell[i].X += field.width;
+                        cell[i].X += FieldSize.width;
                     }
                 }
             }
@@ -66,7 +75,7 @@ namespace Tetris_OOPGame
                 {
                     for (int i = 0; i < cell.Length; i++)
                     {
-                        cell[i].Y += field.height;
+                        cell[i].Y += FieldSize.height;
                     }
                 }
             }
@@ -74,7 +83,7 @@ namespace Tetris_OOPGame
             {
                 if (CanMove(Keys.SPACE))
                 {
-                    TurnFigure(cell);
+                   GetState.TurnFigure(this, cell);
                 }
             }
             if (_step % _speed == 0)
@@ -83,7 +92,7 @@ namespace Tetris_OOPGame
                 {
                     for (int i = 0; i < cell.Length; i++)
                     {
-                        cell[i].Y += field.height;
+                        cell[i].Y += FieldSize.height;
                     }
                 }
                 else
@@ -91,51 +100,50 @@ namespace Tetris_OOPGame
                     IsRun = false;
                     for (int i = 0; i < cell.Length; i++)
                     {
-                        int gridX = (cell[i].X - field.xMin) / field.width;
-                        int gridY = (cell[i].Y - field.yMin) / field.height;
+                        int gridX = (cell[i].X - FieldSize.xMin) / FieldSize.width;
+                        int gridY = (cell[i].Y - FieldSize.yMin) / FieldSize.height;
                         _grid[gridX, gridY] = 1;
                     }
                 }
             }
             _step++;
         }
-     
+
         protected bool CanMove(Keys key)
         {
-            bool canMove = true;
             for (int i = 0; i < cell.Length; i++)
             {
-                int gridX = (cell[i].X - field.xMin) / field.width;
-                int gridY = (cell[i].Y - field.yMin) / field.height;
+                int gridX = (cell[i].X - FieldSize.xMin) / FieldSize.width;
+                int gridY = (cell[i].Y - FieldSize.yMin) / FieldSize.height;
                 if (key == Keys.LEFT)
                 {
                     if (gridX <= 0 || _grid[gridX - 1, gridY] == 1)
                     {
-                        return canMove = false;
+                        return false;
                     }
                 }
                 if (key == Keys.RIGHT)
                 {
                     if (gridX + 1 >= _grid.GetLength(0) || _grid[gridX + 1, gridY] == 1)
                     {
-                        return canMove = false;
+                        return false;
                     }
                 }
                 if (key == Keys.DOWN)
                 {
                     if (gridY + 1 >= _grid.GetLength(1) || _grid[gridX, gridY + 1] == 1)
                     {
-                        return canMove = false;
+                        return false;
                     }
                 }
                 if (key == Keys.SPACE)
                 {
                     if (gridX == _grid.GetLength(0) || gridY + 1 >= _grid.GetLength(1)
                         || _grid[gridX, gridY + 1] == 1)
-                        return canMove = false;
+                        return false;
                 }
             }
-            return canMove;
+            return true;
         }
     }
 }

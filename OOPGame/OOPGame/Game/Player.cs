@@ -3,27 +3,23 @@ using System;
 
 namespace Tetris_OOPGame
 {
-    public class Player : IGameObject
+    public class Player : IMovable
     {
-        private IGameObject figure;
-        private FieldSize field = new FieldSize();
         private const uint fieldColor = 0xFF000000;
         private const uint figureColor = 0xFF0FFF00;
         private readonly int[,] fieldGrid;
+        private IMovable figure;
         private Random rnd = new Random();
-        internal bool gameIsOver = false;
-        private int _score;
-        internal int Score { get { return _score; } }  
+        private GameScore game;
         public bool IsRun { get; private set; }
 
-        public Player() { }
-
-        public Player(ConsoleGraphics graphics)
+        public Player(ConsoleGraphics graphics, GameScore score)
         {
-            fieldGrid = new int[field.numberCellWidth, field.numberCellHeigh];
-            for (int i = 0; i < field.numberCellWidth; i++)
+            game = score;
+            fieldGrid = new int[FieldSize.numberCellWidth, FieldSize.numberCellHeigh];
+            for (int i = 0; i < FieldSize.numberCellWidth; i++)
             {
-                for (int j = 0; j < field.numberCellHeigh; j++)
+                for (int j = 0; j < FieldSize.numberCellHeigh; j++)
                 {
                     fieldGrid[i, j] = 0;
                 }
@@ -32,29 +28,29 @@ namespace Tetris_OOPGame
 
         public void Render(ConsoleGraphics graphics)
         {
-            for (int i = 0; i < field.numberCellWidth; i++)
+            for (int i = 0; i < FieldSize.numberCellWidth; i++)
             {
-                for (int j = 0; j < field.numberCellHeigh; j++)
+                for (int j = 0; j < FieldSize.numberCellHeigh; j++)
                 {
                     if (fieldGrid[i, j] == 1)
                     {
-                        graphics.FillRectangle(figureColor, field.width * i + field.xMin, field.height * j +
-                            field.yMin, field.width, field.height);
+                        graphics.FillRectangle(figureColor, FieldSize.width * i + FieldSize.xMin, FieldSize.height * j +
+                            FieldSize.yMin, FieldSize.width, FieldSize.height);
                         if (j == 0)
                         {
-                            gameIsOver = true;
+                            game.GameIsOn = false;
                         }
                     }
                 }
             }
             figure?.Render(graphics);
-            for (int i = field.xMin; i <= field.xMax; i += field.width * 10)
+            for (int i = FieldSize.xMin; i <= FieldSize.xMax; i += FieldSize.width * 10)
             {
-                graphics.DrawLine(fieldColor, i, field.yMin, i, field.yMax, 3);
+                graphics.DrawLine(fieldColor, i, FieldSize.yMin, i, FieldSize.yMax, 3);
             }
-            for (int i = field.yMin; i <= field.yMax; i += field.height * 20)
+            for (int i = FieldSize.yMin; i <= FieldSize.yMax; i += FieldSize.height * 20)
             {
-                graphics.DrawLine(fieldColor, field.xMin, i, field.xMax, i, 3);
+                graphics.DrawLine(fieldColor, FieldSize.xMin, i, FieldSize.xMax, i, 3);
             }
         }
 
@@ -70,17 +66,17 @@ namespace Tetris_OOPGame
             }
             else
             {
-                for (int i = 0; i < field.numberCellHeigh; i++)
+                for (int i = 0; i < FieldSize.numberCellHeigh; i++)
                 {
-                    for (int j = 0; j < field.numberCellWidth; j++)
+                    for (int j = 0; j < FieldSize.numberCellWidth; j++)
                     {
                         if (fieldGrid[j, i] == 0)
                         {
                             break;
                         }
-                        if (fieldGrid[j, i] == 1 && j == field.numberCellWidth - 1)
+                        if (fieldGrid[j, i] == 1 && j == FieldSize.numberCellWidth - 1)
                         {
-                            ++_score;
+                            ++game.Score;
                             DeleteLine(i);
                         }
                     }
@@ -93,7 +89,7 @@ namespace Tetris_OOPGame
         {
             for (int y = i; y >= 0; y--)
             {
-                for (int x = 0; x < field.numberCellWidth; x++)
+                for (int x = 0; x < FieldSize.numberCellWidth; x++)
                 {
                     if (y != 0)
                     {
@@ -108,10 +104,10 @@ namespace Tetris_OOPGame
             return fieldGrid;
         }
 
-        private IGameObject ChooseFigure()
+        private IMovable ChooseFigure()
         {
-            IGameObject obj = null;
-            int chooseFigure = rnd.Next(0, 7);
+            IMovable obj = null;
+            int chooseFigure = rnd.Next(3, 4);
             switch (chooseFigure)
             {
                 case 0:
@@ -121,10 +117,10 @@ namespace Tetris_OOPGame
                     obj = new RightLFigure(fieldGrid);
                     break;
                 case 2:
-                    obj = new LeftLFigure(fieldGrid);
+                    obj = new LeftLFigure(fieldGrid, new LeftLFigure());
                     break;
                 case 3:
-                    obj = new SquareFigure(fieldGrid);
+                    obj = new SquareFigure(fieldGrid, new SquareFigure());
                     break;
                 case 4:
                     obj = new TFigure(fieldGrid);
@@ -137,6 +133,12 @@ namespace Tetris_OOPGame
                     break;
             }
             return obj;
+
+            //Water water = new Water(new LiquidWaterState());
+            //water.Heat();
+            //water.Frost();
+            //water.Frost();
+
         }
     }
 }
