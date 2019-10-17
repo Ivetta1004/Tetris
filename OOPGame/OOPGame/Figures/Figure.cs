@@ -13,21 +13,20 @@ namespace Tetris_OOPGame
         private const int size = 4;
         private int[,] _grid;
         private int _step;
-        protected Cell[] cell = new Cell[size];
+        private IFigureState _state;
+        internal Cell[] cell = new Cell[size];
         public bool IsRun { get; private set; }
-        public IFigureState GetState { get; set; }
 
-        public Figure() { }
-
-        public Figure(int[,] grid, IFigureState state)
+        public Figure(int[,] grid)
         {
             _step = 1;
             IsRun = true;
             _grid = grid;
-            GetState = state;
+            _state = CreateState();
+            cell = _state.State.ToArray();
         }
 
-        protected abstract Cell[] DoFigure();
+        protected abstract IFigureState CreateState();
 
         public void Render(ConsoleGraphics graphics)
         {
@@ -73,7 +72,8 @@ namespace Tetris_OOPGame
             {
                 if (CanMove(Keys.SPACE))
                 {
-                    GetState.TurnFigure(this, cell);
+                    _state = _state.TurnFigure();
+                    cell = _state.State.ToArray();
                 }
             }
             if (_step % _speed == 0)

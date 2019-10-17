@@ -3,7 +3,7 @@ using System;
 
 namespace Tetris_OOPGame
 {
-    public class Player : IMovable
+    public class Player : IGameObject
     {
         private const uint fieldColor = 0xFF000000;
         private const uint figureColor = 0xFF0FFF00;
@@ -60,7 +60,7 @@ namespace Tetris_OOPGame
             {
                 figure = ChooseFigure();
             }
-            if (figure.IsRun)
+            if (figure.IsRun)   
             {
                 figure.Update(engine);
             }
@@ -107,29 +107,29 @@ namespace Tetris_OOPGame
         private IMovable ChooseFigure()
         {
             IMovable obj = null;
-            int chooseFigure = rnd.Next(0, 7);
+            int chooseFigure = rnd.Next(6, 7);
             switch (chooseFigure)
             {
                 case 0:
-                    obj = new LineFigure(fieldGrid, new LineFigure());
+                    obj = new LineFigure(fieldGrid);
                     break;
                 case 1:
-                    obj = new RightLFigure(fieldGrid, new RightLFigure());
+                    obj = new RightLFigure(fieldGrid);
                     break;
                 case 2:
-                    obj = new LeftLFigure(fieldGrid, new LeftLFigure());
+                    obj = new LeftLFigure(fieldGrid);
                     break;
                 case 3:
-                    obj = new SquareFigure(fieldGrid, new SquareFigure());
+                    obj = new SquareFigure(fieldGrid);
                     break;
                 case 4:
-                    obj = new TFigure(fieldGrid, new TFigure());
+                    obj = new TFigure(fieldGrid);
                     break;
                 case 5:
-                    obj = new ThunderFigure(fieldGrid, new ThunderFigure());
+                    obj = new ThunderFigure(fieldGrid);
                     break;
                 case 6:
-                    obj = new ZFigure(fieldGrid, new ZFigure());
+                    obj = new ZFigure(fieldGrid);
                     break;
             }
             return obj;

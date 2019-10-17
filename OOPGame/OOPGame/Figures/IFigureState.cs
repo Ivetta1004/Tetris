@@ -8,7 +8,7 @@ namespace Tetris_OOPGame
 {
     public interface IFigureState
     {
-        IFigureState TurnFigure(Figure figure, Cell[] cell);
+        IFigureState TurnFigure();
         IEnumerable<Cell> State { get; }
     }
 }

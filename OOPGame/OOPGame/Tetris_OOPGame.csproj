@@ -48,25 +48,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="Figures\ColorFigure.cs" />
     <Compile Include="Figures\Figure.cs" />
+    <Compile Include="Figures\FigureState.cs" />
     <Compile Include="Figures\IFigureState.cs" />
     <Compile Include="Game\GameScore.cs" />
     <Compile Include="Game\IGameObject.cs" />
-    <Compile Include="Figures\LeftLFigure.cs" />
-    <Compile Include="Figures\LineFigure.cs" />
+    <Compile Include="Figures\LeftL\LeftLFigure.cs" />
+    <Compile Include="Figures\Line\LineFigure.cs" />
     <Compile Include="Game\IMovable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game\GameEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Figures\RightLFigure.cs" />
-    <Compile Include="Figures\SquareFigure.cs" />
+    <Compile Include="Figures\RightL\RightLFigure.cs" />
+    <Compile Include="Figures\Square\SquareFigure.cs" />
     <Compile Include="Game\TetrisGameEngine.cs" />
     <Compile Include="Game\Player.cs" />
-    <Compile Include="Figures\TFigure.cs" />
-    <Compile Include="Figures\ThunderFigure.cs" />
-    <Compile Include="Figures\ZFigure.cs" />
+    <Compile Include="Figures\T\TFigure.cs" />
+    <Compile Include="Figures\Thunder\ThunderFigure.cs" />
+    <Compile Include="Figures\Z\ZFigure.cs" />
     <Compile Include="FieldSize.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
