@@ -14,7 +14,6 @@ namespace Tetris_OOPGame
                 get
                 {
                     var first = _figure.Cells.First() ?? new Cell { Color = ColorFigure.lineColor, X = FieldSize.xMin, Y = FieldSize.yMin };
-
                     if (first.X >= 160)
                     {
                         yield return new Cell { Color = ColorFigure.leftLColor, X = first.X - 2* FieldSize.width, Y = first.Y };

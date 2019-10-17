@@ -14,7 +14,6 @@ namespace Tetris_OOPGame
                 get
                 {
                     var first = _figure.Cells.First() ?? new Cell { Color = ColorFigure.lineColor, X = FieldSize.xMin, Y = FieldSize.yMin };
-
                     if (first.Y == 360 || first.Y == 380 || first.Y == 400)
                     {
                         yield return first;

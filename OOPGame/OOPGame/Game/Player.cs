@@ -5,8 +5,6 @@ namespace Tetris_OOPGame
 {
     public class Player : IGameObject
     {
-        private const uint fieldColor = 0xFF000000;
-        private const uint figureColor = 0xFF0FFF00;
         private readonly int[,] fieldGrid;
         private IMovable figure;
         private Random rnd = new Random();
@@ -34,7 +32,7 @@ namespace Tetris_OOPGame
                 {
                     if (fieldGrid[i, j] == 1)
                     {
-                        graphics.FillRectangle(figureColor, FieldSize.width * i + FieldSize.xMin, FieldSize.height * j +
+                        graphics.FillRectangle(ColorFigure.figureColor, FieldSize.width * i + FieldSize.xMin, FieldSize.height * j +
                             FieldSize.yMin, FieldSize.width, FieldSize.height);
                         if (j == 0)
                         {
@@ -46,11 +44,11 @@ namespace Tetris_OOPGame
             figure?.Render(graphics);
             for (int i = FieldSize.xMin; i <= FieldSize.xMax; i += FieldSize.width * 10)
             {
-                graphics.DrawLine(fieldColor, i, FieldSize.yMin, i, FieldSize.yMax, 3);
+                graphics.DrawLine(ColorFigure.fieldColor, i, FieldSize.yMin, i, FieldSize.yMax, 3);
             }
             for (int i = FieldSize.yMin; i <= FieldSize.yMax; i += FieldSize.height * 20)
             {
-                graphics.DrawLine(fieldColor, FieldSize.xMin, i, FieldSize.xMax, i, 3);
+                graphics.DrawLine(ColorFigure.fieldColor, FieldSize.xMin, i, FieldSize.xMax, i, 3);
             }
         }
 
@@ -107,7 +105,7 @@ namespace Tetris_OOPGame
         private IMovable ChooseFigure()
         {
             IMovable obj = null;
-            int chooseFigure = rnd.Next(6, 7);
+            int chooseFigure = rnd.Next(0, 7);
             switch (chooseFigure)
             {
                 case 0:

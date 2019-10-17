@@ -13,7 +13,7 @@ namespace Tetris_OOPGame
             {
                 get
                 {
-                    var first = _figure._cells.First() ?? new Cell { Color = ColorFigure.squareColor, X = FieldSize.xMin, Y = FieldSize.yMin };
+                    var first = _figure.Cells.First() ?? new Cell { Color = ColorFigure.squareColor, X = FieldSize.xMin, Y = FieldSize.yMin };
 
                     yield return new Cell { Color = ColorFigure.squareColor, X = first.X, Y = first.Y };
                     yield return new Cell { Color = ColorFigure.squareColor, X = first.X + FieldSize.width, Y = first.Y };

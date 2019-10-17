@@ -15,5 +15,7 @@ namespace Tetris_OOPGame
         internal const uint tColor = 0xFF33E6FF;
         internal const uint thunderColor = 0xFFa8329d;
         internal const uint zColor = 0xFFFFFF00;
+        internal const uint fieldColor = 0xFF000000;
+        internal const uint figureColor = 0xFF0FFF00;
     }
 }
